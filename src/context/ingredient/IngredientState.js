@@ -1,72 +1,108 @@
 import React, { useReducer } from 'react'
 import IngredientContext from './ingredientContext'
 import ingredientReducer from './ingredientReducer'
-import qs from 'querystring'
-import axios from 'axios'
-
-import {
-  ADD_INGREDIENT,
-  SET_RESULT,
-  GET_INGREDIENTS,
-  CLEAR_INGREDIENTS,
-  SET_SELECTED,
-  CLEAR_SELECTED,
-  REMOVE_SELECTED
-} from '../types'
+import { SET_SELECTED, REMOVE_SELECTED } from '../types'
 
 const IngredientState = props => {
   const initialState = {
     result: null,
-    ingredients: [],
+    ingredients: [
+      {
+        id: 1,
+        name: 'ตะไคร้'
+      },
+      {
+        id: 2,
+        name: 'หอมแดง'
+      },
+      {
+        id: 3,
+        name: 'กระเทียม'
+      },
+      {
+        id: 4,
+        name: 'ข่า'
+      },
+      {
+        id: 5,
+        name: 'มะกรูด'
+      },
+      {
+        id: 6,
+        name: 'พริกไทย'
+      },
+      {
+        id: 7,
+        name: 'กะปิ'
+      },
+      {
+        id: 8,
+        name: 'ลูกผักชี'
+      },
+      {
+        id: 9,
+        name: 'ยี่หร่าคั่วป่น'
+      },
+      {
+        id: 10,
+        name: 'พริกชี้ฟ้าแห้ง'
+      },
+      {
+        id: 11,
+        name: 'พริกขี้หนูแห้ง'
+      },
+      {
+        id: 12,
+        name: 'พริกชี้ฟ้าเขียว'
+      },
+      {
+        id: 13,
+        name: 'ขมิ้น'
+      },
+      {
+        id: 14,
+        name: 'กุ้งแห้งป่น'
+      },
+      {
+        id: 15,
+        name: 'ถั่วลิสงบด'
+      },
+      {
+        id: 16,
+        name: 'พริกขี้หนูแดง'
+      },
+      {
+        id: 17,
+        name: 'พริกขี้หนูเขียว'
+      },
+      {
+        id: 18,
+        name: 'รากผักชี'
+      },
+      {
+        id: 19,
+        name: 'กระชาย'
+      },
+      {
+        id: 20,
+        name: 'เนื้อปลาต้ม'
+      },
+      {
+        id: 21,
+        name: 'ปลาอินทรีย์เค็ม'
+      },
+      {
+        id: 22,
+        name: 'ขมิ้นสด'
+      }
+    ],
     selected: []
   }
 
   const [state, dispatch] = useReducer(ingredientReducer, initialState)
 
-  // Actions
-  // Get all ingredients
-  const getIngredients = async () => {
-    try {
-      let res = await axios.get('http://localhost:5000/ingredients')
-      dispatch({ type: GET_INGREDIENTS, payload: res.data })
-    } catch (err) {
-      dispatch({ type: SET_RESULT, payload: err.response.data })
-    }
-  }
-  // Add new ingredient
-  const addIngredient = async name => {
-    const body = {
-      name: name
-    }
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }
-    try {
-      let res = await axios.post(
-        'http://localhost:5000/ingredients',
-        qs.stringify(body),
-        config
-      )
-      console.log('Added')
-      dispatch({ type: ADD_INGREDIENT, payload: res.data })
-    } catch (err) {
-      // console.dir(err.response)
-      dispatch({ type: SET_RESULT, payload: err.response.data })
-    }
-  }
-
-  const clearIngredients = () => {
-    dispatch({ type: CLEAR_INGREDIENTS, payload: [] })
-  }
-
   const setSelected = item => {
     dispatch({ type: SET_SELECTED, payload: item })
-  }
-
-  const clearSelected = item => {
-    dispatch({ type: CLEAR_SELECTED })
   }
 
   const removeSelected = item => {
@@ -79,11 +115,7 @@ const IngredientState = props => {
         result: state.result,
         ingredients: state.ingredients,
         selected: state.selected,
-        addIngredient,
-        getIngredients,
-        clearIngredients,
         setSelected,
-        clearSelected,
         removeSelected
       }}
     >

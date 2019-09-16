@@ -7,38 +7,169 @@ import { SET_RESULT, GET_CURRIES, CLEAR_CURRIES } from '../types'
 
 const CurryState = props => {
   const initialState = {
-    result: null,
-    curries: []
+    curries: [
+      {
+        name: 'แกงเผ็ด',
+        ingredients: [
+          'ตะไคร้',
+          'หอมแดง',
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'พริกไทย',
+          'กะปิ',
+          'ลูกผักชี',
+          'ยี่หร่าคั่วป่น',
+          'พริกชี้ฟ้าแห้ง',
+          'พริกขี้หนูแห้ง'
+        ],
+        id: 1
+      },
+      {
+        name: 'แกงเขียวหวาน',
+        ingredients: [
+          'ตะไคร้',
+          'หอมแดง',
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'พริกไทย',
+          'กะปิ',
+          'ลูกผักชี',
+          'ยี่หร่าคั่วป่น',
+          'พริกชี้ฟ้าเขียว',
+          'พริกขี้หนูเขียว'
+        ],
+        id: 2
+      },
+      {
+        name: 'แกงคั่ว',
+        ingredients: [
+          'ตะไคร้',
+          'หอมแดง',
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'พริกไทย',
+          'กะปิ',
+          'พริกชี้ฟ้าแห้ง',
+          'กุ้งแห้งป่น'
+        ],
+        id: 3
+      },
+      {
+        name: 'ฉุ่ฉี่',
+        ingredients: [
+          'ตะไคร้',
+          'หอมแดง',
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'พริกไทย',
+          'กะปิ',
+          'พริกชี้ฟ้าแห้ง',
+          'รากผักชี'
+        ],
+        id: 4
+      },
+      {
+        name: 'พระรามลงสรง',
+        ingredients: [
+          'ตะไคร้',
+          'หอมแดง',
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'พริกไทย',
+          'กะปิ',
+          'พริกชี้ฟ้าแห้ง',
+          'กุ้งแห้งป่น',
+          'ถั่วลิสงบด'
+        ],
+        id: 5
+      },
+      {
+        name: 'พริกขี้หนู / คั่วกลิ้ง',
+        ingredients: [
+          'ตะไคร้',
+          'หอมแดง',
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'พริกไทย',
+          'กะปิ',
+          'พริกขี้หนูแห้ง',
+          'ขมิ้นสด'
+        ],
+        id: 6
+      },
+      {
+        name: 'แกงเหลือง',
+        ingredients: [
+          'หอมแดง',
+          'กระเทียม',
+          'กะปิ',
+          'พริกขี้หนูแห้ง',
+          'ขมิ้นสด',
+          'พริกขี้หนูแดง'
+        ],
+        id: 7
+      },
+      {
+        name: 'แกงส้ม',
+        ingredients: [
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'กะปิ',
+          'พริกชี้ฟ้าแห้ง',
+          'กระชาย'
+        ],
+        id: 8
+      },
+      {
+        name: 'น้ำยาปักษ์ใต้',
+        ingredients: [
+          'ตะไคร้',
+          'หอมแดง',
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'พริกไทย',
+          'กะปิ',
+          'พริกขี้หนูแห้ง',
+          'ขมิ้นสด',
+          'กระชาย',
+          'เนื้อปลาต้ม'
+        ],
+        id: 9
+      },
+      {
+        name: 'น้ำยากลาง',
+        ingredients: [
+          'ตะไคร้',
+          'หอมแดง',
+          'กระเทียม',
+          'ข่า',
+          'มะกรูด',
+          'พริกไทย',
+          'กะปิ',
+          'พริกชี้ฟ้าแห้ง',
+          'กระชาย',
+          'ปลาอินทรีย์เค็ม',
+          'เนื้อปลาต้ม'
+        ],
+        id: 10
+      }
+    ]
   }
 
-  const [state, dispatch] = useReducer(curryReducer, initialState)
-
-  // Actions
-
-  // Get curries
-  const getCurries = async () => {
-    try {
-      let res = await axios.get(
-        'http://localhost:5000/curries?expand=ingredients'
-      )
-      dispatch({ type: GET_CURRIES, payload: res.data })
-    } catch (err) {
-      dispatch({ type: SET_RESULT, payload: err.response.data })
-    }
-  }
-
-  // Clear Curries
-  const clearCurries = () => {
-    dispatch({ type: CLEAR_CURRIES })
-  }
+  const [state] = useReducer(curryReducer, initialState)
 
   return (
     <CurryContext.Provider
       value={{
-        result: state.result,
-        curries: state.curries,
-        getCurries,
-        clearCurries
+        curries: state.curries
       }}
     >
       {props.children}

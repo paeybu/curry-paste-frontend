@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import CurryContext from '../../context/curry/curryContext'
 import IngredientContext from '../../context/ingredient/ingredientContext'
 import CurryItem from './CurryItem'
@@ -15,12 +15,6 @@ const Curries = () => {
     setSelected,
     removeSelected
   } = ingredientContext
-
-  useEffect(() => {
-    getCurries()
-    getIngredients()
-    // eslint-disable-next-line
-  }, [])
 
   const selectIngredient = e => {
     const btn = e.target
