@@ -1,0 +1,26 @@
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  column-gap: 2em;
+  grid-auto-rows: 1fr;
+}
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+.card {
+  transition: box-shadow 0.25s, opacity 300ms ease-in !important;
+}
